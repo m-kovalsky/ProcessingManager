@@ -15,7 +15,7 @@ To use the tool, simply download the ProcessingManager.cs script, paste it into 
 After you set up a batch using the Processing Manager tool and deploy your model to a server, you can process the batch using this method.
 
 1. Download the ProcessBatches.cs script and save it to your computer.
-2. Run the code in the command prompt below (filling in the <parameters>) according to the variety of tabular you are using.
+2. Run the code in the command prompt below (filling in the \<parameters\>) according to the variety of tabular you are using.
 
 Note: Please replace the 'batchName' parameter in each of the variations below with the name of the batch you would like to process.
 
