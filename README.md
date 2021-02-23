@@ -35,5 +35,11 @@ In order to run this for Power BI Premium, you will need to enable [XMLA R/W End
 
     set batchName=batchName
     start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/<Premium Workspace>;User ID=app:<Application ID>@<Tenant ID>;Password=<Application Secret>" "<Premium Dataset>" -S "<C# Script File Location (ProcessBatches.cs)>" 
-    
-    
+
+## Additional Functionalities
+
+* Export Script: When in the Summary view of the Processing Manager tool (the last window), you may click the Script button. This will dynamically generate and save a C# script which will recreate the selected processing batch. The script is saved to your desktop.
+
+## Integration Applications
+
+The command line code may be integrated into any application which is able to run command line code. Examples of such applications include [Azure DevOps](https://azure.microsoft.com/services/devops/ "Azure DevOps") and [Azure Data Factory](https://azure.microsoft.com/services/data-factory/ "Azure Data Factory"). Integrating the Processing Manager solution into these applciations will streamline the processing operations of your tabular model(s).
