@@ -10,7 +10,7 @@ This tool is designed to simplify the management of processing large tabular mod
 
 To use the tool, simply download the ProcessingManager.cs script, paste it into the Advanced Scripting window in Tabular Editor and click the play button (or press F5). The tool itself does not process the model. It simply saves the instructions for processing the batches as metadata (annotations) within the model.
 
-## Process Batches
+## Processing Batches
 
 After you set up a batch using the Processing Manager tool and deploy your model to a server, you can process the batch using this method.
 
