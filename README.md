@@ -27,7 +27,7 @@ Note: Please replace the 'batchName' parameter in each of the variations below w
 ## [Azure Analyis Services](https://azure.microsoft.com/services/analysis-services/ "Azure Analysis Services")
 
     set batchName=batchName
-    start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "Provider=MSOLAP;Data Source=asazure://<westeurope>.asazure.windows.net/<AASServerName>;User ID=<xxxxx>;Password=<xxxxx>;Persist Security Info=True;Impersonation Level=Impersonate" "<Database Name>" -S "<C# Script File Location (ProcessBatches.cs)>"
+    start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "Provider=MSOLAP;Data Source=asazure://<AAS Region>.asazure.windows.net/<AAS Server Name>;User ID=<xxxxx>;Password=<xxxxx>;Persist Security Info=True;Impersonation Level=Impersonate" "<Database Name>" -S "<C# Script File Location (ProcessBatches.cs)>"
 
 ## [Power BI Premium](https://powerbi.microsoft.com/power-bi-premium/ "Power BI Premium")
 
