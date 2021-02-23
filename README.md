@@ -6,7 +6,7 @@ Processing Manager is a tool that allows you to set customized processing 'batch
 
 This tool is designed to simplify the management of processing large tabular models.
 
-## Running the tool
+## Running the Tool
 
 To use the tool, simply download the ProcessingManager.cs script, paste it into the Advanced Scripting window in Tabular Editor and click the play button (or press F5). The tool itself does not process the model. It simply saves the instructions for processing the batches as metadata (annotations) within the model.
 
