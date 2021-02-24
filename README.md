@@ -41,7 +41,7 @@ Running this in Power BI Premium requires enabling [XMLA R/W Endpoints](https://
 ## Additional Features
 
 * Clicking the 'Sequence' check box will enable the [Sequence command](https://docs.microsoft.com/analysis-services/tmsl/sequence-command-tmsl?view=asallproducts-allversions "Sequence command") and allow you to set the [Max Parallelism](https://docs.microsoft.com/analysis-services/tmsl/sequence-command-tmsl?view=asallproducts-allversions#request "Max Parallelism") property.
-* Export Script: When in the Summary view of the Processing Manager tool (the last window), you will see the Script button. Clicking it will dynamically generate a C# script which will recreate the selected processing batch. The script is automatically saved as a .cs file to your desktop. This may come in handy in scenarios where you need to copy batch modifications to different versions of a model (i.e. between branches or servers).
+* Export Script: When in the Summary view of the Processing Manager tool (the last window), you will see the Script button. Clicking it will dynamically generate a C# script which can be used to recreate the selected processing batch (by running the script in the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html "Advanced Scripting") window in [Tabular Editor](https://tabulareditor.com/ "Tabular Editor"). The script is automatically saved as a .cs file to your desktop. This may come in handy in scenarios where you need to copy batch modifications to different versions of a model (i.e. between branches or servers).
 
 ## Integration Applications
 
