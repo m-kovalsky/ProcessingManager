@@ -19,7 +19,7 @@ After you set up a batch using the Processing Manager tool and deploy your model
 1. Download the ProcessBatches.cs script and save it to your computer.
 2. Run the code in the command prompt below (filling in the \<parameters\>) according to the variety of tabular you are using.
 
-Note: Please replace the 'batchName' parameter in each of the variations below with the name of the batch you would like to process.
+*Note: Please replace the 'batchName' parameter in each of the variations below with the name of the batch you would like to process.*
 
 ## [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SQL Server Analysis Services")
 
