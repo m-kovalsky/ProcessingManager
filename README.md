@@ -33,14 +33,15 @@ After you set up a batch using the Processing Manager tool and deploy your model
 
 ## [Power BI Premium](https://powerbi.microsoft.com/power-bi-premium/ "Power BI Premium")
 
-In order to run this for Power BI Premium, you will need to enable [XMLA R/W Endpoints](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools "XMLA R/W Endpoints") for your Premium Workspace. You will also need to set up a [Service Principal](https://tabulareditor.com/2020/06/02/PBI-SP-Access.html "Setting up a Service Principal").
+Running this in Power BI Premium requires enabling [XMLA R/W Endpoints](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools "XMLA R/W Endpoints") for your Premium Workspace. An additional requirement is setting up a [Service Principal](https://tabulareditor.com/2020/06/02/PBI-SP-Access.html "Setting up a Service Principal").
 
     set batchName=batchName
     start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "Provider=MSOLAP;Data Source=powerbi://api.powerbi.com/v1.0/myorg/<Premium Workspace>;User ID=app:<Application ID>@<Tenant ID>;Password=<Application Secret>" "<Premium Dataset>" -S "<C# Script File Location (ProcessBatches.cs)>" 
 
-## Additional Functionalities
+## Additional Features
 
-* Export Script: When in the Summary view of the Processing Manager tool (the last window), you may click the Script button. This will dynamically generate and save a C# script which will recreate the selected processing batch. The script is saved to your desktop.
+* Clicking the 'Sequence' check box will enable the [Sequence command](https://docs.microsoft.com/analysis-services/tmsl/sequence-command-tmsl?view=asallproducts-allversions "Sequence command") and allow you to set the [Max Parallelism](https://docs.microsoft.com/analysis-services/tmsl/sequence-command-tmsl?view=asallproducts-allversions#request "Max Parallelism") property.
+* Export Script: When in the Summary view of the Processing Manager tool (the last window), you will see the Script button. Clicking it will dynamically generate a C# script which will recreate the selected processing batch. The script is automatically saved as a .cs file to your desktop. This may come in handy in scenarios where you need to copy batch modifications to different versions of a model (i.e. between branches or servers).
 
 ## Integration Applications
 
