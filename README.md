@@ -10,7 +10,7 @@ This tool is designed to simplify the management of processing large tabular mod
 
 To use the tool, download the ProcessingManager.cs script, paste it into the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html "Advanced Scripting") window in [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") and click the play button (or press F5).  The tool itself does not process the model. It simply saves the instructions for processing the batches as metadata (annotations) within the model.
 
-*Note: For easier access, it is recommended to save the script as a [Custom Action](https://docs.tabulareditor.com/Custom-Actions.html "Custom Action").
+*Note: For easier access, it is recommended to save the script as a [Custom Action](https://docs.tabulareditor.com/Custom-Actions.html "Custom Action").*
 
 ## Processing Batches
 
