@@ -12,7 +12,7 @@ To use the tool, download the ProcessingManager.cs script, paste it into the [Ad
 
 *Note: For easier access, it is recommended to save the script as a [Custom Action](https://docs.tabulareditor.com/Custom-Actions.html "Custom Action").*
 
-## Processing Batches
+## Processing the Batches
 
 After you set up a batch using the Processing Manager tool and deploy your model to a server, you can process the batch using this method. 
 
