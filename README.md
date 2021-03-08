@@ -11,7 +11,11 @@ This tool is designed to simplify the management of processing large tabular mod
 
 To use the tool, download the ProcessingManager.cs script, paste it into the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html "Advanced Scripting") window in [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") and click the play button (or press F5).  The tool itself does not process the model. It simply saves the instructions for processing the batches as metadata (annotations) within the model.
 
+Make sure to click the 'Save' button within the Processing Manager tool after making changes. If the 'Save' button is not clicked your changes will not be saved back to the model.
+
 *Note: For easier access, it is recommended to save the script as a [Custom Action](https://docs.tabulareditor.com/Custom-Actions.html "Custom Action").*
+
+*Note: If you are using the Processing Manager tool via a model created in Power BI Desktop (via opening Tabular Editor from the External Tools ribbon) you must ensure this setting is checked within Tabular Editor: File -> Preferences -> Allow unsupported Power BI features (experimental).
 
 ## Processing the Batches
 
