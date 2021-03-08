@@ -10,7 +10,7 @@ string batchNameFull = batchPrefix+batchName;
 string processingMethod = string.Empty; // Database, Table, Partition
 string[] typeList = {"full","automatic","calculate","clearValues","defragment","dataOnly"};
 string processingType;
-string timeSpent = string.Empty;
+string timeSpent = "";
 
 // Error check: Batch name
 if (!Model.HasAnnotation(batchNameFull))
@@ -61,7 +61,7 @@ string tmslEnd = "    ]" + newline + "  }" + newline + "}";
 string seqEnd = newline+"     ]"+newline+"   }"+newline+"}";
 string tmsl = tmslStart;
 string infoStart = "Processing type '"+processingType+"' of the '"+databaseName+"' model ";
-string infoMid = string.Empty;
+string infoMid = "";
 string info = string.Empty;
 string infoEnd = " has finished in ";
 var sw = new System.Diagnostics.Stopwatch();
@@ -213,9 +213,9 @@ if (runTMSL)
     }
 
     Info(info + timeSpent);
+    return;
 }
 else
 {
-    //info.Output();
     tmsl.Output();
 }
