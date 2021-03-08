@@ -15,7 +15,7 @@ Make sure to click the 'Save' button within the Processing Manager tool after ma
 
 *Note: For easier access, it is recommended to save the script as a [Custom Action](https://docs.tabulareditor.com/Custom-Actions.html "Custom Action").*
 
-*Note: If you are using the Processing Manager tool via a model created in Power BI Desktop (via opening Tabular Editor from the External Tools ribbon) you must ensure this setting is checked within Tabular Editor: File -> Preferences -> Allow unsupported Power BI features (experimental).
+*Note: If you are using the Processing Manager tool via a model created in Power BI Desktop (via opening Tabular Editor from the External Tools ribbon) you must ensure this setting is checked within Tabular Editor: File -> Preferences -> Allow unsupported Power BI features (experimental).*
 
 ## Processing the Batches
 
