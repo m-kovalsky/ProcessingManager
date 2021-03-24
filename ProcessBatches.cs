@@ -1,16 +1,23 @@
-// Initial Parameter
+#r "Microsoft.AnalysisServices.Core.dll"
+
+// Initial Parameters
 var batchName = System.Environment.GetEnvironmentVariable("batchName");
 bool runTMSL = true;
+bool seqEnabled = false;
+int maxP = 0;
 
 // Set parameters
 string batchPrefix = "TabularProcessingBatch_";
-bool seqEnabled = false;
-int maxP = 0;
 string batchNameFull = batchPrefix+batchName;
+string ann = Model.GetAnnotation(batchNameFull);
 string processingMethod = string.Empty; // Database, Table, Partition
-string[] typeList = {"full","automatic","calculate","clearValues","defragment","dataOnly"};
+string[] typeList = {"full","automatic","calculate","clearvalues","defragment","dataonly"};
 string processingType;
 string timeSpent = "";
+string databaseName = Model.Database.Name;
+string newline = Environment.NewLine;
+TOM.SaveOptions so = new TOM.SaveOptions();
+var sw = new System.Diagnostics.Stopwatch();
 
 // Error check: Batch name
 if (!Model.HasAnnotation(batchNameFull))
@@ -19,8 +26,7 @@ if (!Model.HasAnnotation(batchNameFull))
     return;
 }
 
-string ann = Model.GetAnnotation(batchNameFull);
-
+// Determine processing type, if sequence command is used, max parallelism
 if (ann.Contains("_"))
 {
     processingType = ann.Substring(0,ann.IndexOf("_"));
@@ -43,28 +49,39 @@ else
 }
 
 // Error check: Processing type
-if (! typeList.Contains(processingType))
+if (! typeList.Contains(processingType.ToLower()))
 {
     Error("Invalid processing type. Ensure that the processing type is valid.");
     return;
 }
 
-// Additional set parameters
-string databaseName = Model.Database.Name;
-string newline = Environment.NewLine;
-string seqStart = "{"+newline+"   \"sequence\":"+newline+"    {"+newline+"    \"maxParallelism\": "+maxP.ToString()+",   "+newline+"    \"operations\": ["+newline;
-string tmslStart = "{" + newline + "  \"refresh\": {" + newline + "    \"type\": \"" + processingType + "\"," + newline + "    \"objects\": [ ";
-string tmslMid = "{\"database\": \"" + databaseName + "\",\"table\": \"%table%\"} ";
-string tmslMidDB = "{\"database\": \"" + databaseName + "\"}";
-string tmslMidPart = "{\"database\": \"" + databaseName + "\",\"table\": \"%table%\" ,\"partition\": \"%partition%\"} ";
-string tmslEnd = "    ]" + newline + "  }" + newline + "}";
-string seqEnd = newline+"     ]"+newline+"   }"+newline+"}";
-string tmsl = tmslStart;
-string infoStart = "Processing type '"+processingType+"' of the '"+databaseName+"' model ";
-string infoMid = "";
-string info = string.Empty;
-string infoEnd = " has finished in ";
-var sw = new System.Diagnostics.Stopwatch();
+// Determine refresh type
+var refType = TOM.RefreshType.Full;
+
+if (processingType.ToLower() == "automatic")
+{
+    refType = TOM.RefreshType.Automatic;
+}
+else if (processingType.ToLower() == "dataonly")
+{
+    refType = TOM.RefreshType.DataOnly;
+}
+else if (processingType.ToLower() == "clearvalues")
+{
+    refType = TOM.RefreshType.ClearValues;
+}
+else if (processingType.ToLower() == "calculate")
+{
+    refType = TOM.RefreshType.Calculate;
+}
+else if (processingType.ToLower() == "defragment")
+{
+    refType = TOM.RefreshType.Defragment;
+}
+
+// Build Info output text
+var sb_Info = new System.Text.StringBuilder();
+sb_Info.Append("Processing type '"+processingType+"' of the '"+databaseName+"' model ");
 
 // Identify processing method
 if (Model.AllPartitions.Any(a => a.HasAnnotation(batchNameFull)))
@@ -80,60 +97,38 @@ else
     processingMethod = "Database";
 }
 
-// Generate TMSL
+// Generate request refresh
 if (processingMethod == "Database")
 {
-    tmsl = tmsl + newline + "      " + tmslMidDB;
+    Model.Database.TOMDatabase.Model.RequestRefresh(refType);
 }
 else if (processingMethod == "Table")
-{
-    int i=0;
-    infoMid = "for the following tables: [";
+{    
+    sb_Info.Append("for the following tables: [");
     foreach (var t in Model.Tables.Where(a => a.HasAnnotation(batchNameFull) && a.GetAnnotation(batchNameFull) == "1"))
     {
         string tableName = t.Name;
-
-        if (i == 0)
-        {
-            tmsl = tmsl + newline + "       " + tmslMid.Replace("%table%",tableName);
-            infoMid = infoMid + "'"+tableName+"'";
-        }
-        else
-        {
-            tmsl = tmsl + newline + "      ," + tmslMid.Replace("%table%",tableName);
-            infoMid = infoMid + ",'"+tableName+"'";
-        }
-
-        i++;        
+        Model.Database.TOMDatabase.Model.Tables[tableName].RequestRefresh(refType);   
+        sb_Info.Append("'"+tableName+"',");
     }
 
-    infoMid = infoMid + "]";
+    sb_Info.Remove(sb_Info.Length-1,1);
+    sb_Info.Append("]");
 }
 else if (processingMethod == "Partition")
 {
-    int i=0;
-    infoMid = "for the following partitions: [";
+    sb_Info.Append("for the following partitions: [");    
     foreach (var t in Model.Tables.Where(a => a.HasAnnotation(batchNameFull) || a.Partitions.Any(b => b.HasAnnotation(batchNameFull))))
     {
         string tableName = t.Name;
+        
         if (t.HasAnnotation(batchNameFull))
         {
             foreach (var p in t.Partitions.ToList())
             {
                 string pName = p.Name;
-
-                if (i == 0)
-                {
-                    tmsl = tmsl + newline + "       " + tmslMidPart.Replace("%table%",tableName).Replace("%partition%",pName);
-                    infoMid = infoMid + "'"+tableName+"'["+pName+"]";
-                }
-                else
-                {
-                    tmsl = tmsl + newline + "      ," + tmslMidPart.Replace("%table%",tableName).Replace("%partition%",pName);
-                    infoMid = infoMid + ",'"+tableName+"'["+pName+"]";
-                }
-
-                i++;
+                Model.Database.TOMDatabase.Model.Tables[tableName].Partitions[pName].RequestRefresh(refType);
+                sb_Info.Append("'"+tableName+"'["+pName+"],");
             }
         }
         else
@@ -141,40 +136,29 @@ else if (processingMethod == "Partition")
             foreach (var p in t.Partitions.Where(a => a.HasAnnotation(batchNameFull)))
             {
                 string pName = p.Name;
-
-                if (i == 0)
-                {
-                    tmsl = tmsl + newline + "       " + tmslMidPart.Replace("%table%",tableName).Replace("%partition%",pName);
-                    infoMid = infoMid + "'"+tableName+"'["+pName+"]";
-                }
-                else
-                {
-                    tmsl = tmsl + newline + "      ," + tmslMidPart.Replace("%table%",tableName).Replace("%partition%",pName);
-                    infoMid = infoMid + ",'"+tableName+"'["+pName+"]";
-                }
-
-                i++;
+                Model.Database.TOMDatabase.Model.Tables[tableName].Partitions[pName].RequestRefresh(refType);
+                sb_Info.Append("'"+tableName+"'["+pName+"],");             
             }
         }
     }
 
-    infoMid = infoMid + "]";
+    sb_Info.Remove(sb_Info.Length-1,1);
+    sb_Info.Append("]");
 }
 
-info = infoStart + infoMid + infoEnd;
-tmsl = tmsl + newline + tmslEnd;
+sb_Info.Append(" has finished in ");
 
-// Add sequence if it is enabled
-if (seqEnabled)
-{
-    tmsl = seqStart + tmsl + seqEnd;
-}
-
+// Execute refresh query
 if (runTMSL)
 {
     sw.Start();
-    ExecuteCommand(tmsl);
-    sw.Stop();
+    // Add sequence if it is enabled
+    if (seqEnabled)
+    {        
+        so.MaxParallelism = maxP;        
+    }
+    Model.Database.TOMDatabase.Model.SaveChanges(so); 
+    sw.Stop();    
 
     TimeSpan ts = sw.Elapsed;
   
@@ -212,10 +196,24 @@ if (runTMSL)
         timeSpent = timeSpent.Replace("seconds","second");
     }
 
-    Info(info + timeSpent);
+    Info(sb_Info.ToString() + timeSpent);
     return;
 }
 else
 {
-    tmsl.Output();
+    if (processingMethod == "Database")
+    {
+        var x = Model.Database.TOMDatabase;
+        TOM.JsonScripter.ScriptRefresh(x,refType).Output();
+    }
+    else if (processingMethod == "Table")
+    {
+        var x = Model.Database.TOMDatabase.Model.Tables.Where(a => a.Annotations.Where(b => b.Name == batchNameFull).Count() == 1).ToArray();
+        TOM.JsonScripter.ScriptRefresh(x,refType).Output();
+    }
+    else if (processingMethod == "Partition")
+    {
+    }
 }
+
+
