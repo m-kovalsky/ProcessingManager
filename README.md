@@ -33,7 +33,7 @@ Since each of the scripts below uses an Environment Variable (set batchName=<Bat
     set batchName=<Batch Name>
     start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "<Server Name>" "<Database Name>" -S "<C# Script File Location (ProcessBatches.cs)>"
 
-## [Azure Analyis Services](https://azure.microsoft.com/services/analysis-services/ "Azure Analysis Services")
+## [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/ "Azure Analysis Services")
 
     set batchName=<Batch Name>
     start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "Provider=MSOLAP;Data Source=asazure://<AAS Region>.asazure.windows.net/<AAS Server Name>;User ID=<xxxxx>;Password=<xxxxx>;Persist Security Info=True;Impersonation Level=Impersonate" "<Database Name>" -S "<C# Script File Location (ProcessBatches.cs)>"
