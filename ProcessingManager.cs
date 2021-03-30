@@ -70,7 +70,7 @@ System.Windows.Forms.ToolTip scriptButtonToolTip = new System.Windows.Forms.Tool
 scriptButtonToolTip.SetToolTip(scriptButton, "Saves a script to your desktop with the instructions to create the selected batch");
 System.Windows.Forms.Button backButton = new System.Windows.Forms.Button();
 System.Windows.Forms.ToolTip backButtonToolTip = new System.Windows.Forms.ToolTip();
-backButtonToolTip.SetToolTip(backButton, "Navigate to back the main page");
+backButtonToolTip.SetToolTip(backButton, "Navigate back the main page");
 System.Windows.Forms.ToolTip sequenceCheckBoxToolTip = new System.Windows.Forms.ToolTip();
 sequenceCheckBoxToolTip.SetToolTip(sequenceCheckBox, "Check this box to enable sequential processing");
 System.Windows.Forms.Label saveComment = new System.Windows.Forms.Label();
