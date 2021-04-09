@@ -24,9 +24,9 @@ Make sure to click the 'Save' button within the Processing Manager tool after ma
 After you set up a batch using the Processing Manager tool and deploy your model to a server, you can process the batch using this method. 
 
 1. Download the ProcessBatches.cs script and save it to your computer.
-2. Run the code in the command prompt below (filling in the \<parameters\>) according to the variety of tabular you are using.
+2. Run the code below in the command prompt (filling in the \<parameters\>) according to the variety of tabular you are using.
 
-Since each of the scripts below uses an Environment Variable (set batchName=<Batch Name>), there is no need to duplicate the ProcessBatches.cs file for each batch. The same ProcessBatches.cs file can be referenced for processing all batches. Setting the 'batchName' Environment Variable instructs the code which batch to process.
+Since each of the scripts below uses an Environment Variable (set batchName=<Batch Name>), there is no need to copy the ProcessBatches.cs file for each batch. The same ProcessBatches.cs file can be referenced for processing all batches. Setting the 'batchName' Environment Variable instructs the code which batch to process.
 
 ## [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SQL Server Analysis Services")
 
