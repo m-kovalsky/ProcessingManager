@@ -516,7 +516,7 @@ System.Action<int> NextStep = stepNumber =>
 int goButtonX = 190;
 int goButtonY = 330;
 // Event Handlers (Start Screen)
-newbatchButton.Click += (System.Object sender, System.EventArgs e) => {​
+newbatchButton.Click += (System.Object sender, System.EventArgs e) => {
 
     goButton.Visible = true;
     goButton.Location = new Point(goButtonX, goButtonY);
@@ -526,12 +526,12 @@ newbatchButton.Click += (System.Object sender, System.EventArgs e) => {​
     batchNameTextBox.Enabled = true;
 };
 
-batchComboBox.SelectedValueChanged += (System.Object sender, System.EventArgs e) => {​
+batchComboBox.SelectedValueChanged += (System.Object sender, System.EventArgs e) => {
 
     goButton.Enabled = true;         
 };
 
-existingbatchButton.Click += (System.Object sender, System.EventArgs e) => {​
+existingbatchButton.Click += (System.Object sender, System.EventArgs e) => {
 
     goButton.Location = new Point(goButtonX, goButtonY+30);
     batchComboBox.Visible = true;
@@ -552,7 +552,7 @@ existingbatchButton.Click += (System.Object sender, System.EventArgs e) => {​
     }  
 };
 
-goButton.Click += (System.Object sender, System.EventArgs e) => {​
+goButton.Click += (System.Object sender, System.EventArgs e) => {
 
     startPanel.Visible = false;
     topPanel.Visible = true;
@@ -590,17 +590,17 @@ goButton.Click += (System.Object sender, System.EventArgs e) => {​
     }
 };
 
-treeView.AfterExpand += (System.Object sender, System.Windows.Forms.TreeViewEventArgs e) => {​ 
+treeView.AfterExpand += (System.Object sender, System.Windows.Forms.TreeViewEventArgs e) => {
     
     IsExpOrCol = true;
 };
 
-treeView.AfterCollapse += (System.Object sender, System.Windows.Forms.TreeViewEventArgs e) => {​ 
+treeView.AfterCollapse += (System.Object sender, System.Windows.Forms.TreeViewEventArgs e) => {
     
     IsExpOrCol = true;
 };
 
-treeView.NodeMouseClick += (System.Object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e) => {​ 
+treeView.NodeMouseClick += (System.Object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e) => {
     
     if (IsExpOrCol == false)
     {
@@ -848,7 +848,7 @@ backButton.MouseLeave += (System.Object sender, System.EventArgs e) => {
     backButton.FlatAppearance.BorderSize = 0;
 };
 
-saveButton.Click += (System.Object sender, System.EventArgs e) => {​
+saveButton.Click += (System.Object sender, System.EventArgs e) => {
 
 	batchName = batchNameTextBox.Text;
 	processingType = typeComboBox.Text;
@@ -960,7 +960,7 @@ saveButton.Click += (System.Object sender, System.EventArgs e) => {​
 	}
 };
 
-deleteButton.Click += (System.Object sender, System.EventArgs e) => {​
+deleteButton.Click += (System.Object sender, System.EventArgs e) => {
 
 	if (batchName.Length == 0)
 	{
@@ -988,7 +988,7 @@ deleteButton.Click += (System.Object sender, System.EventArgs e) => {​
 	}
 };
 
-summaryButton.Click += (System.Object sender, System.EventArgs e) => {​
+summaryButton.Click += (System.Object sender, System.EventArgs e) => {
 
 	if (! (hasSaved == true || existingbatchButton.Checked == true))
 	{
@@ -1040,7 +1040,7 @@ summaryButton.Click += (System.Object sender, System.EventArgs e) => {​
 	}
 };
 
-batchNameComboBox.SelectedValueChanged += (System.Object sender, System.EventArgs e) => {​
+batchNameComboBox.SelectedValueChanged += (System.Object sender, System.EventArgs e) => {
 
     batchName = batchNameComboBox.Text;
     batchNameFull = batchPrefix + batchName;
@@ -1068,7 +1068,7 @@ batchNameComboBox.SelectedValueChanged += (System.Object sender, System.EventArg
     NextStep(2); 
 };
 
-scriptButton.Click += (System.Object sender, System.EventArgs e) => {​      
+scriptButton.Click += (System.Object sender, System.EventArgs e) => {
 
     // Save export script to desktop
     string desktopPath = Environment.GetFolderPath(System.Environment.SpecialFolder.DesktopDirectory);
@@ -1077,7 +1077,7 @@ scriptButton.Click += (System.Object sender, System.EventArgs e) => {​
     Info("A script to generate Processing Batch '"+batchName+"' has been saved to the desktop.");
 };
 
-backButton.Click += (System.Object sender, System.EventArgs e) => {​      
+backButton.Click += (System.Object sender, System.EventArgs e) => {
 
 	summaryTreeView.Visible = false;
 	scriptButton.Visible = false;
@@ -1110,7 +1110,7 @@ backButton.Click += (System.Object sender, System.EventArgs e) => {​
 	}
 };
 
-sequenceCheckBox.CheckStateChanged += (System.Object sender, System.EventArgs e) => {​      
+sequenceCheckBox.CheckStateChanged += (System.Object sender, System.EventArgs e) => {
 
 	if (sequenceCheckBox.Checked == true)
 	{
