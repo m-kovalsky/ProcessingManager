@@ -58,7 +58,7 @@ Running this in Power BI Premium requires enabling [XMLA R/W endpoints](https://
 
 The command line code may be integrated into any application which is able to run command line code. Examples of such applications include [Azure DevOps](https://azure.microsoft.com/services/devops/ "Azure DevOps") and [Azure Data Factory](https://azure.microsoft.com/services/data-factory/ "Azure Data Factory"). Integrating the Processing Manager solution into these applciations will streamline the processing operations of your tabular model(s). In order to use these applications for a Power BI Premium dataset you will need to set up a [Service Principal](https://tabulareditor.com/2020/06/02/PBI-SP-Access.html "Service Principal") and a [Key Vault](https://azure.microsoft.com/services/key-vault/ "Azure Key Vault"). 
 
-Make sure to read my [blog post](https://www.elegantbi.com/post/processingmanager "Processing Manager") for more information on setting up the processing within Azure DevOps.
+Make sure to read my [blog post](https://www.elegantbi.com/post/processingmanager "Processing Manager") for more information on setting up the processing within [Azure DevOps](https://azure.microsoft.com/services/devops/ "Azure DevOps").
 
 ## Requirements
 
