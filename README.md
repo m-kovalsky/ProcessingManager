@@ -30,7 +30,7 @@ After you set up a batch using the Processing Manager tool and deploy your model
 
 Since each of the scripts below uses an Environment Variable (set batchName=<Batch Name>), there is no need to copy the ProcessBatches.cs file for each batch. The same ProcessBatches.cs file can be referenced for processing all batches. Setting the 'batchName' Environment Variable instructs the code which batch to process.
     
-***Note that although it is possible to run this in the command prompt, it is recommended to run the following processing scripts by integrating into an application as discussed [below](https://github.com/m-kovalsky/ProcessingManager#integration-applications "Integration Applications").***
+***Note that although it is possible to run this in the command prompt, it is recommended to run the following processing scripts by integrating them into an application as discussed [below](https://github.com/m-kovalsky/ProcessingManager#integration-applications "Integration Applications").***
 
 ## [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SQL Server Analysis Services")
 
