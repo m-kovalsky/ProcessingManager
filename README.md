@@ -1,4 +1,4 @@
-# Processing Manager
+# [Processing Manager](https://www.elegantbi.com/post/processingmanager "Processing Manager")
 
 Make sure to read my [blog post](https://www.elegantbi.com/post/processingmanager "Processing Manager") on this tool!
 
