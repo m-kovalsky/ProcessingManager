@@ -864,21 +864,24 @@ saveButton.Click += (System.Object sender, System.EventArgs e) => {
 		batchNameFull = batchPrefix+batchName;	
 	}
 
-	int rootNodeSelCount = 0;
-	int childNodeSelCount = 0;
+	int tableNodeSelCount = 0;
+	int partitionNodeSelCount = 0;
 
-	foreach (System.Windows.Forms.TreeNode rootNode in treeView.Nodes)
+	foreach (System.Windows.Forms.TreeNode modelNode in treeView.Nodes)
 	{
-		if (rootNode.StateImageIndex == 1)
+		foreach (System.Windows.Forms.TreeNode tableNode in modelNode.Nodes)
 		{
-			rootNodeSelCount++;
-		}
-
-		foreach (System.Windows.Forms.TreeNode childNode in rootNode.Nodes)
-		{
-			if (childNode.StateImageIndex == 1)
+			if (tableNode.StateImageIndex == 1)
 			{
-				childNodeSelCount++;
+				tableNodeSelCount++;
+			}
+
+			foreach (System.Windows.Forms.TreeNode partitionNode in tableNode.Nodes)
+			{
+				if (partitionNode.StateImageIndex == 1)
+				{
+					partitionNodeSelCount++;
+				}
 			}
 		}
 	}
@@ -895,7 +898,7 @@ saveButton.Click += (System.Object sender, System.EventArgs e) => {
 	{
 		Error("Batch not saved. Batch name cannot be the same as an existing batch name. Please enter a different batch name.");
 	}
-	else if (rootNodeSelCount == 0 && childNodeSelCount == 0)
+	else if (tableNodeSelCount == 0 && partitionNodeSelCount == 0)
 	{
 		Error("Batch not saved. Batch must have at least one table or partition selected.");
 	}
