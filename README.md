@@ -5,6 +5,9 @@ Make sure to read my [blog post](https://www.elegantbi.com/post/processingmanage
 Processing Manager is a tool that allows you to set customized processing 'batches' for a tabular model. This tool runs inside of [Tabular Editor](https://tabulareditor.com/ "Tabular Editor")'s [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html "Advanced Scripting") window and is compatible for all incarnations of tabular - [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SQL Server Analysis Services"), [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/ "Azure Analysis Services"), and [Power BI Premium](https://powerbi.microsoft.com/power-bi-premium/ "Power BI Premium") (using the [XMLA R/W
 endpoint](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools "XMLA R/W Endpoint")).
 
+![Processing Manager](https://github.com/m-kovalsky/Tabular/blob/master/Icons/ProcessingManagerIcon.png "Processing Manager")
+
+
 ## Purpose
 
 This tool is designed to simplify the management of processing large tabular models.
