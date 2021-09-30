@@ -22,6 +22,7 @@ string batchPrefix = "TabularProcessingBatch_";
 int batchPrefixLen = batchPrefix.Length;
 var sb_ExportScript = new System.Text.StringBuilder();
 string newline = Environment.NewLine;
+string ebiURL = @"https://www.elegantbi.com";
 
 // Start screen
 System.Windows.Forms.Form newForm = new System.Windows.Forms.Form();
@@ -31,6 +32,7 @@ System.Windows.Forms.RadioButton existingbatchButton = new System.Windows.Forms.
 System.Windows.Forms.ComboBox batchComboBox = new System.Windows.Forms.ComboBox();            
 System.Windows.Forms.Button goButton = new System.Windows.Forms.Button();
 System.Windows.Forms.Label homeToolLabel = new System.Windows.Forms.Label();
+System.Windows.Forms.LinkLabel ebiHome = new System.Windows.Forms.LinkLabel();
 
 // Main screen
 System.Windows.Forms.Panel topPanel = new System.Windows.Forms.Panel();
@@ -97,7 +99,7 @@ System.Drawing.Font homeToolNameFont = new Font("Century Gothic", 24);
 System.Drawing.Font stdFont = new Font("Century Gothic", 10);
 
 // Form
-newForm.TopMost = true;
+newForm.TopLevel = true;
 newForm.BackColor = bkgrdColor;
 newForm.Text = "Processing Manager";
 newForm.Size = new Size(formWidth,formHeight);
@@ -121,6 +123,17 @@ startPanel.Controls.Add(homeToolLabel);
 startPanel.Visible = true;
 startPanel.Size = new Size(formWidth,formHeight);
 startPanel.Location = new Point(0,0);
+
+startPanel.Controls.Add(ebiHome);
+ebiHome.Text = "Designed by Elegant BI";
+ebiHome.Size = new Size(200,40);
+ebiHome.Location = new Point(165,460);
+ebiHome.Font = elegantFont;
+
+ebiHome.LinkClicked += (System.Object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e) => {
+
+    System.Diagnostics.Process.Start(ebiURL);
+};
 
 // Panels
 topPanel.Visible = false;
@@ -169,7 +182,7 @@ treePanel.Controls.Add(saveComment);
 
 // Start Screen Objects
 homeToolLabel.Text = "Processing Manager";
-homeToolLabel.Size = new Size(450,350);
+homeToolLabel.Size = new Size(450,100);
 homeToolLabel.Location = new Point(80,150);
 homeToolLabel.Font = homeToolNameFont;
 
