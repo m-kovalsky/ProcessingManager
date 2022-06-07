@@ -550,7 +550,7 @@ existingbatchButton.Click += (System.Object sender, System.EventArgs e) => {
     batchComboBox.Visible = true;
     goButton.Visible = true;    
     goButton.Enabled = false;
-    batchNameTextBox.Enabled = false;
+    //batchNameTextBox.Enabled = false;
     
     // Populate Batch Combo Box
     batchComboBox.Items.Clear();
@@ -579,7 +579,7 @@ goButton.Click += (System.Object sender, System.EventArgs e) => {
         batchName = batchComboBox.Text;
         batchNameFull = batchPrefix+batchName;
         batchNameTextBox.Text = batchName;
-        batchNameTextBox.Enabled = false;
+        batchNameTextBox.Enabled = true;
         string ann = Model.GetAnnotation(batchNameFull);
         if (ann.Contains("_"))
         {
@@ -594,7 +594,7 @@ goButton.Click += (System.Object sender, System.EventArgs e) => {
         }
         typeComboBox.Text = processingType;
 
-        NextStep(1); 
+        NextStep(1);
     }
     else
     {
@@ -861,21 +861,7 @@ backButton.MouseLeave += (System.Object sender, System.EventArgs e) => {
     backButton.FlatAppearance.BorderSize = 0;
 };
 
-saveButton.Click += (System.Object sender, System.EventArgs e) => {
-
-	batchName = batchNameTextBox.Text;
-	processingType = typeComboBox.Text;
-	
-	if (sequenceCheckBox.Checked)
-	{
-		seqEnabled = true;
-		mp = Convert.ToInt32(maxPNumeric.Value);
-	}
-
-	if (batchName.Length > 0)
-	{
-		batchNameFull = batchPrefix+batchName;	
-	}
+saveButton.Click += (System.Object sender, System.EventArgs e) => {	
 
 	int tableNodeSelCount = 0;
 	int partitionNodeSelCount = 0;
@@ -899,15 +885,15 @@ saveButton.Click += (System.Object sender, System.EventArgs e) => {
 		}
 	}
 
-	if (batchName.Length == 0)
+	if (batchNameTextBox.Text.Length == 0)
 	{
 		Error("Batch not saved. Must enter a valid batch name.");
 	}
-	else if (processingType.Length == 0)
+	else if (typeComboBox.Text.Length == 0)
 	{
 		Error("Batch not saved. Must enter a valid processing type.");
 	}
-	else if (newbatchButton.Checked == true && Model.HasAnnotation(batchNameFull) && hasSaved == false)
+	else if (newbatchButton.Checked == true && Model.HasAnnotation(batchPrefix + batchNameTextBox.Text) && hasSaved == false)
 	{
 		Error("Batch not saved. Batch name cannot be the same as an existing batch name. Please enter a different batch name.");
 	}
@@ -918,6 +904,42 @@ saveButton.Click += (System.Object sender, System.EventArgs e) => {
 
 	else
 	{
+		// Batch name changed
+		if (batchName != batchNameTextBox.Text)
+		{
+			foreach (var x in Model.GetAnnotations().Where(a => a == batchNameFull).ToList())
+			{
+				Model.RemoveAnnotation(batchNameFull);
+				Model.SetAnnotation(batchPrefix + batchNameTextBox.Text,processingType);
+			}
+
+			foreach (var t in Model.Tables.Where(a => a.HasAnnotation(batchNameFull)).ToList())
+			{
+			    t.RemoveAnnotation(batchNameFull);
+			    t.SetAnnotation(batchPrefix + batchNameTextBox.Text,"1");
+			}
+
+			foreach (var p in Model.AllPartitions.Where(a => a.HasAnnotation(batchNameFull)).ToList())
+			{
+			    p.RemoveAnnotation(batchNameFull);
+			    p.SetAnnotation(batchPrefix + batchNameTextBox.Text,"1");
+			}
+		}
+
+		batchName = batchNameTextBox.Text;
+		processingType = typeComboBox.Text;
+		
+		if (sequenceCheckBox.Checked)
+		{
+			seqEnabled = true;
+			mp = Convert.ToInt32(maxPNumeric.Value);
+		}
+
+		if (batchName.Length > 0)
+		{
+			batchNameFull = batchPrefix+batchName;	
+		}		
+
 		// Update Model annotation
 		
 		if (seqEnabled == true && mp == 0)
